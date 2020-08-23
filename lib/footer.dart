@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:izijob/empleo.dart';
+import 'package:izijob/cachuelo.dart';
+import 'package:izijob/contactar.dart';
 
 class Footer extends StatefulWidget {
   @override
@@ -8,37 +11,41 @@ class Footer extends StatefulWidget {
 }
 
 class _FooterState extends State<Footer> {
-  //int _currentIndex = 0;
-  //final List<Widget> _children = [];
+  int _currentIndex = 0;
+  final List<Widget> _children = [ Empleo(), Cachuelo(), Contactar()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //body: _children[_currentIndex],
+      body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        //currentIndex: _currentIndex,
-        //onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        onTap: onTabTapped,
         // new
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
+            icon: new Icon(Icons.work),
             title: new Text('Empleo'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.flare), title: Text('Cachuelo')),
+              icon: Icon(Icons.monetization_on), 
+              title: Text('Cachuelo')),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.gradient),
+            icon: new Icon(Icons.call),
             title: new Text('Contactar'),
           ),
         ],
+        selectedItemColor: Colors.amber[900],
+        backgroundColor : Colors.blue[900],
+        unselectedItemColor : Colors.white,
       ),
     );
   }
 
-  /*void onTabTapped(int index) {
+  void onTabTapped(int index) {
     //Cambia los valores y recarga los datos en pantalla
     setState(() {
       _currentIndex = index;
     });
-  }*/
+  }
 }
