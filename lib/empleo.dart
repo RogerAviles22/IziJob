@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:izijob/publicarEmpleo.dart';
 
 class Empleo extends StatefulWidget {
   @override
@@ -16,7 +17,11 @@ class _EmpleoState extends State<Empleo> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor : Colors.blue[900],
-        onPressed: (){          
+        onPressed: (){ 
+          Navigator.push(context, 
+          MaterialPageRoute(builder: (context){
+            return PublicarEmpleo();
+          }));       
         },
         child: const Icon(Icons.add),
       ),   
