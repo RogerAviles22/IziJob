@@ -13,7 +13,7 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
   //SingingCharacter _character = SingingCharacter.empleo;
   final globalKey = GlobalKey<ScaffoldState>();
 
-  final tf_tipo = "Empleo" ;
+  final tf_tipo = "Empleo";
   final tf_titulo = TextEditingController();
   final tf_descripcion = TextEditingController();
   final tf_exp = TextEditingController();
@@ -44,6 +44,21 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
         title: Text('Publicar Empleo'),
         backgroundColor: Colors.blue[900],
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              if (_formKey.currentState.validate()) {
+                // Si el formulario es válido, queremos mostrar un Snackbar
+                final snackBar = SnackBar(content: Text('Empleo Publicado'));
+                globalKey.currentState.showSnackBar(snackBar);
+              }
+            },
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -53,145 +68,114 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
             child: Form(
               key: _formKey,
               child: ListView(
-                children: <Widget>[  
-                  TextFormField(
-                    decoration: InputDecoration(
-                        labelText: 'Título',
-                        hintText: 'Ejemplo: Necesito empleador...'),
-                    controller: tf_titulo,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingresa el título';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      labelText: 'Descripción',
-                      hintText:
-                          'Ej: Señor(a) de tal edad...',
-                    ),
-                    controller: tf_descripcion,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingresa la descripción';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      labelText: 'Experiencia',
-                      hintText:
-                          'Ej: Experiencia en dicho campo...',
-                    ),
-                    controller: tf_exp,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingresa la experiencia necesaria';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Sueldo',
-                      hintText: 'Ingresa el posible sueldo',
-                    ),
-                    controller: tf_sueldo,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingresa el sueldo.';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Vacantes',
-                      hintText: 'Ingrese números de vacantes para el puesto',
-                    ),
-                    controller: tf_vacantes,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingrese números de vacantes.';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Teléfonos',
-                      hintText: 'Ingresa los números separado por comas',
-                    ),
-                    controller: tf_telefono,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingresa número(s) telefónico(s).';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'E-mail',
-                      hintText: 'Ingresa e-mails separado por comas.',
-                    ),
-                    controller: tf_email,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingresa correo(s) electrónico(s).';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Categorías',
-                      hintText: 'Ej: cocineros, música, ingenieros...',
-                    ),
-                    controller: tf_categoria,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Por favor, ingresa al menos 1 categoría.';
-                      }
-                      return null;
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Center(
-                        child: RaisedButton(
-                      color: Colors.blue[900],
-                      textColor: Colors.white,
-                      onPressed: () {
-                        // devolverá true si el formulario es válido, o falso si
-                        // el formulario no es válido.
-                        if (_formKey.currentState.validate()) {
-                          // Si el formulario es válido, queremos mostrar un Snackbar
-                          final snackBar = SnackBar(content: Text('Empleo Publicado'));
-                          globalKey.currentState.showSnackBar(snackBar);
-                          //Navigator.pop(context);
-                          /*Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Processing Data')));*/
+                children: <Widget>[
+                  new ListTile(
+                      leading: const Icon(Icons.title),
+                      title: textFormFieldFunction(
+                          'Título',
+                          'Ej: Necesito empleador...',
+                          tf_titulo,
+                          'Por favor, ingresa el título')),
+                  new ListTile(
+                    leading: const Icon(Icons.description),
+                    title: TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        labelText: 'Descripción',
+                        hintText: 'Ej: Señor(a) de tal edad...',
+                      ),
+                      controller: tf_descripcion,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Por favor, ingresa la descripción';
                         }
-                        print(tf_descripcion);
+                        return null;
                       },
-                      child: Text('Enviar'),
-                    )),
+                    ),
                   ),
+                  new ListTile(
+                    leading: const Icon(Icons.star),
+                    title: TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        labelText: 'Experiencia',
+                        hintText: 'Ej: Experiencia en dicho campo...',
+                      ),
+                      controller: tf_exp,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Por favor, ingresa la experiencia necesaria';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  new ListTile(
+                    leading: const Icon(Icons.monetization_on),
+                    title: textFormFieldFunction(
+                        'Sueldo',
+                        'Ingresa el posible sueldo',
+                        tf_sueldo,
+                        'Por favor, ingresa el sueldo.'),
+                  ),
+                  new ListTile(
+                    leading: const Icon(Icons.supervisor_account),
+                    title: textFormFieldFunction(
+                        'Vacantes',
+                        'Números de vacantes para el puesto',
+                        tf_vacantes,
+                        'Por favor, ingrese números de vacantes.'),
+                  ),
+                  new ListTile(
+                    leading: const Icon(Icons.contact_phone),
+                    title: textFormFieldFunction(
+                        'Teléfonos',
+                        'Teléfonos separado por comas',
+                        tf_telefono,
+                        'Por favor, ingresa número(s) telefónico(s).'),
+                  ),
+                  new ListTile(
+                    leading: const Icon(Icons.contact_mail),
+                    title: textFormFieldFunction(
+                        'E-mails',
+                        'E-mails separado por comas.',
+                        tf_email,
+                        'Por favor, ingresa correo(s) electrónico(s).'),
+                  ),
+                  new ListTile(
+                    leading: const Icon(Icons.category),
+                    title: textFormFieldFunction(
+                      'Categorías',
+                      'Ej: cocineros, música, ingenieros...',
+                      tf_categoria,
+                      'Por favor, ingresa al menos 1 categoría.'),
+                  ),                  
                 ],
               ),
             ),
           ),
         ),
       ),
-      backgroundColor : Colors.green,
+      backgroundColor: Colors.green,
+    );
+  }
+
+  TextFormField textFormFieldFunction(String labelText, String hintText,
+      TextEditingController tecontroller, String msgError) {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: labelText,
+        hintText: hintText,
+      ),
+      controller: tecontroller,
+      validator: (value) {
+        if (value.isEmpty) {
+          return msgError;
+        }
+        return null;
+      },
     );
   }
 }
