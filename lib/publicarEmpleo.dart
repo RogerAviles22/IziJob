@@ -67,7 +67,8 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
             padding: const EdgeInsets.all(5.0),
             child: Form(
               key: _formKey,
-              child: ListView(
+                child: Scrollbar(
+                  child: ListView(
                 children: <Widget>[
                   new ListTile(
                       leading: const Icon(Icons.title),
@@ -155,6 +156,7 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
                 ],
               ),
             ),
+              ),
           ),
         ),
       ),
