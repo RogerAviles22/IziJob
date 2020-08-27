@@ -21,11 +21,7 @@ class _CachueloState extends State<Cachuelo> {
       floatingActionButton: FloatingActionButton(
         backgroundColor : Colors.blue[900],
         onPressed: (){  
-          Navigator.push(context, 
-          MaterialPageRoute(builder: (context){
-            return PublicarEmpleo();
-          })); 
-                 
+               
         },
         child: const Icon(Icons.add),
       ),  
