@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:izijob/publicarEmpleo.dart';
+
 
 class Cachuelo extends StatefulWidget {
   @override
@@ -26,6 +26,8 @@ class _CachueloState extends State<Cachuelo> {
         child: const Icon(Icons.add),
       ),  
       //backgroundColor : Colors.green,
+      
+      //bottomNavigationBar: Footer()
     );
   }
 }

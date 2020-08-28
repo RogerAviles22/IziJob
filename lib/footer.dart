@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:izijob/empleo.dart';
+import 'package:izijob/empleoVista.dart';
 import 'package:izijob/cachuelo.dart';
 import 'package:izijob/contactar.dart';
 
@@ -12,7 +12,7 @@ class Footer extends StatefulWidget {
 
 class _FooterState extends State<Footer> {
   int _currentIndex = 0;
-  final List<Widget> _children = [ Empleo(), Cachuelo(), Contactar()];
+  final List<Widget> _children = [ EmpleoVista(), Cachuelo(), Contactar()];
 
   @override
   Widget build(BuildContext context) {

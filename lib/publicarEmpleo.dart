@@ -1,5 +1,8 @@
 //https://flutter-es.io/docs/cookbook/navigation/navigation-basics
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:izijob/footer.dart';
 
 class PublicarEmpleo extends StatefulWidget {
   @override
@@ -13,29 +16,14 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
   //SingingCharacter _character = SingingCharacter.empleo;
   final globalKey = GlobalKey<ScaffoldState>();
 
-  final tf_tipo = "Empleo";
-  final tf_titulo = TextEditingController();
-  final tf_descripcion = TextEditingController();
-  final tf_exp = TextEditingController();
-  final tf_vacantes = TextEditingController();
-  final tf_sueldo = TextEditingController();
-  final tf_telefono = TextEditingController();
-  final tf_email = TextEditingController();
-  final tf_categoria = TextEditingController();
-
-  @override
-  /*void dispose() {
-    // Limpia el controlador cuando el Widget se descarte
-    tf_titulo.dispose();
-    tf_descripcion.dispose();
-    tf_exp.dispose();
-    tf_vacantes.dispose();
-    tf_sueldo.dispose();
-    tf_telefono.dispose();
-    tf_email.dispose();
-    tf_categoria.dispose();
-    super.dispose();
-  }*/
+  String tfTitulo,
+      tfDescripcion,
+      tfExp,
+      tfVacantes,
+      tfSueldo,
+      tfTelefono,
+      tfEmail,
+      tfCategoria;
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,13 +38,7 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
               Icons.check,
               color: Colors.white,
             ),
-            onPressed: () {
-              if (_formKey.currentState.validate()) {
-                // Si el formulario es válido, queremos mostrar un Snackbar
-                final snackBar = SnackBar(content: Text('Empleo Publicado'));
-                globalKey.currentState.showSnackBar(snackBar);
-              }
-            },
+            onPressed: uploadStatusEmpleo,
           )
         ],
       ),
@@ -72,11 +54,20 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
                   children: <Widget>[
                     new ListTile(
                         leading: const Icon(Icons.title),
-                        title: textFormFieldFunction(
-                            'Título',
-                            'Ej: Necesito empleador...',
-                            tf_titulo,
-                            'Por favor, ingresa el título')),
+                        title: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Título',
+                            hintText: 'Ej: Necesito empleador...',
+                          ),
+                          validator: (value) {
+                            return value.isEmpty ? 'Por favor, ingresa el título' : null;
+                          },
+                          onSaved: (value) {
+                            return tfTitulo = value;
+                          },
+                        )
+                        
+                        ),
                     new ListTile(
                       leading: const Icon(Icons.description),
                       title: TextFormField(
@@ -86,12 +77,14 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
                           labelText: 'Descripción',
                           hintText: 'Ej: Señor(a) de tal edad...',
                         ),
-                        controller: tf_descripcion,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Por favor, ingresa la descripción';
                           }
                           return null;
+                        },
+                        onSaved: (value) {
+                          return tfDescripcion = value;
                         },
                       ),
                     ),
@@ -104,54 +97,91 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
                           labelText: 'Experiencia',
                           hintText: 'Ej: Experiencia en dicho campo...',
                         ),
-                        controller: tf_exp,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Por favor, ingresa la experiencia necesaria';
                           }
                           return null;
                         },
+                        onSaved: (value) {
+                          return tfExp = value;
+                        },
                       ),
                     ),
                     new ListTile(
                       leading: const Icon(Icons.monetization_on),
-                      title: textFormFieldFunction(
-                          'Sueldo',
-                          'Ingresa el posible sueldo',
-                          tf_sueldo,
-                          'Por favor, ingresa el sueldo.'),
+                      title: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Sueldo',
+                            hintText: 'Ingresa el posible sueldo',
+                          ),
+                          validator: (value) {
+                            return value.isEmpty ? 'Por favor, ingresa el sueldo.' : null;
+                          },
+                          onSaved: (value) {
+                            return tfSueldo = value;
+                          },
+                        )
                     ),
                     new ListTile(
                       leading: const Icon(Icons.supervisor_account),
-                      title: textFormFieldFunction(
-                          'Vacantes',
-                          'Números de vacantes para el puesto',
-                          tf_vacantes,
-                          'Por favor, ingrese números de vacantes.'),
+                      title: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Vacantes',
+                            hintText: 'Ej: 1, 2-4, Por ver...',
+                          ),
+                          validator: (value) {
+                            return value.isEmpty ? 'Por favor, ingrese números de vacantes.' : null;
+                          },
+                          onSaved: (value) {
+                            return tfVacantes = value;
+                          },
+                        )
                     ),
                     new ListTile(
                       leading: const Icon(Icons.contact_phone),
-                      title: textFormFieldFunction(
-                          'Teléfonos',
-                          'Teléfonos separado por comas',
-                          tf_telefono,
-                          'Por favor, ingresa número(s) telefónico(s).'),
+                      title: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Teléfonos',
+                            hintText: 'Ej: 098542261,(04)254789...',
+                          ),
+                          validator: (value) {
+                            return value.isEmpty ? 'Por favor, ingresa número(s) telefónico(s).' : null;
+                          },
+                          onSaved: (value) {
+                            return tfTelefono = value;
+                          },
+                        )
                     ),
                     new ListTile(
                       leading: const Icon(Icons.contact_mail),
-                      title: textFormFieldFunction(
-                          'E-mails',
-                          'E-mails separado por comas.',
-                          tf_email,
-                          'Por favor, ingresa correo(s) electrónico(s).'),
+                      title: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'E-mails',
+                            hintText: 'E-mails separado por comas.',
+                          ),
+                          validator: (value) {
+                            return value.isEmpty ? 'Por favor, ingresa correo(s) electrónico(s).' : null;
+                          },
+                          onSaved: (value) {
+                            return tfEmail = value;
+                          },
+                        )
                     ),
                     new ListTile(
                       leading: const Icon(Icons.category),
-                      title: textFormFieldFunction(
-                          'Categorías',
-                          'Ej: cocineros, música, ingenieros...',
-                          tf_categoria,
-                          'Por favor, ingresa al menos 1 categoría.'),
+                      title: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Categorías',
+                            hintText: 'Ej: cocineros, música, ingenieros...',
+                          ),
+                          validator: (value) {
+                            return value.isEmpty ? 'Por favor, ingresa al menos 1 categoría.' : null;
+                          },
+                          onSaved: (value) {
+                            return tfCategoria = value;
+                          },
+                        )
                     ),
                   ],
                 ),
@@ -164,19 +194,69 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
     );
   }
 
-  TextFormField textFormFieldFunction(String labelText, String hintText,
-      TextEditingController tecontroller, String msgError) {
+  //Guardamos texto
+  void guardarToDatabase() {
+    var dbTimeKey = DateTime.now();
+    var formatDate = DateFormat('d/M/y');
+    var formatTime = new DateFormat.jm();
+
+    String date = formatDate.format(dbTimeKey);
+    String time = formatTime.format(dbTimeKey);
+
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    var data = {
+      "titulo": tfTitulo,
+      "descripcion": tfDescripcion,
+      "experiencia": tfExp,
+      "vacantes": tfVacantes,
+      "sueldo": tfSueldo,
+      "telefono": tfTelefono,
+      "email": tfEmail,
+      "categoria": tfCategoria,
+      "fechaP": date,
+      "tiempoP": time,
+      "idUser": 1
+    };
+    print(data);
+    ref.child("Empleo").push().set(data);
+  }
+
+  //Valida que esté todos los campos llenos
+  bool validarForm() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      // Si el formulario es válido, queremos mostrar un Snackbar
+      form.save();
+      final snackBar = SnackBar(content: Text('Empleo Publicado'));
+      globalKey.currentState.showSnackBar(snackBar);
+      return true;
+    }
+    return false;
+  }
+
+  void uploadStatusEmpleo() async {
+    if (validarForm()) {
+      guardarToDatabase();
+      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(
+        builder: (context){
+          return Footer();
+      }));
+    }
+  }
+
+  TextFormField textFormFieldFunction(
+      String labelText, String hintText, String tfTexto, String msgError) {
     return TextFormField(
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
       ),
-      controller: tecontroller,
       validator: (value) {
-        if (value.isEmpty) {
-          return msgError;
-        }
-        return null;
+        return value.isEmpty ? msgError : null;
+      },
+      onSaved: (value) {
+        return tfTexto = value;
       },
     );
   }
