@@ -67,100 +67,100 @@ class _PublicarEmpleoState extends State<PublicarEmpleo> {
             padding: const EdgeInsets.all(5.0),
             child: Form(
               key: _formKey,
-                child: Scrollbar(
-                  child: ListView(
-                children: <Widget>[
-                  new ListTile(
-                      leading: const Icon(Icons.title),
+              child: Scrollbar(
+                child: ListView(
+                  children: <Widget>[
+                    new ListTile(
+                        leading: const Icon(Icons.title),
+                        title: textFormFieldFunction(
+                            'Título',
+                            'Ej: Necesito empleador...',
+                            tf_titulo,
+                            'Por favor, ingresa el título')),
+                    new ListTile(
+                      leading: const Icon(Icons.description),
+                      title: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          labelText: 'Descripción',
+                          hintText: 'Ej: Señor(a) de tal edad...',
+                        ),
+                        controller: tf_descripcion,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Por favor, ingresa la descripción';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    new ListTile(
+                      leading: const Icon(Icons.star),
+                      title: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          labelText: 'Experiencia',
+                          hintText: 'Ej: Experiencia en dicho campo...',
+                        ),
+                        controller: tf_exp,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Por favor, ingresa la experiencia necesaria';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    new ListTile(
+                      leading: const Icon(Icons.monetization_on),
                       title: textFormFieldFunction(
-                          'Título',
-                          'Ej: Necesito empleador...',
-                          tf_titulo,
-                          'Por favor, ingresa el título')),
-                  new ListTile(
-                    leading: const Icon(Icons.description),
-                    title: TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        labelText: 'Descripción',
-                        hintText: 'Ej: Señor(a) de tal edad...',
-                      ),
-                      controller: tf_descripcion,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Por favor, ingresa la descripción';
-                        }
-                        return null;
-                      },
+                          'Sueldo',
+                          'Ingresa el posible sueldo',
+                          tf_sueldo,
+                          'Por favor, ingresa el sueldo.'),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.star),
-                    title: TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        labelText: 'Experiencia',
-                        hintText: 'Ej: Experiencia en dicho campo...',
-                      ),
-                      controller: tf_exp,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Por favor, ingresa la experiencia necesaria';
-                        }
-                        return null;
-                      },
+                    new ListTile(
+                      leading: const Icon(Icons.supervisor_account),
+                      title: textFormFieldFunction(
+                          'Vacantes',
+                          'Números de vacantes para el puesto',
+                          tf_vacantes,
+                          'Por favor, ingrese números de vacantes.'),
                     ),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.monetization_on),
-                    title: textFormFieldFunction(
-                        'Sueldo',
-                        'Ingresa el posible sueldo',
-                        tf_sueldo,
-                        'Por favor, ingresa el sueldo.'),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.supervisor_account),
-                    title: textFormFieldFunction(
-                        'Vacantes',
-                        'Números de vacantes para el puesto',
-                        tf_vacantes,
-                        'Por favor, ingrese números de vacantes.'),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.contact_phone),
-                    title: textFormFieldFunction(
-                        'Teléfonos',
-                        'Teléfonos separado por comas',
-                        tf_telefono,
-                        'Por favor, ingresa número(s) telefónico(s).'),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.contact_mail),
-                    title: textFormFieldFunction(
-                        'E-mails',
-                        'E-mails separado por comas.',
-                        tf_email,
-                        'Por favor, ingresa correo(s) electrónico(s).'),
-                  ),
-                  new ListTile(
-                    leading: const Icon(Icons.category),
-                    title: textFormFieldFunction(
-                      'Categorías',
-                      'Ej: cocineros, música, ingenieros...',
-                      tf_categoria,
-                      'Por favor, ingresa al menos 1 categoría.'),
-                  ),                  
-                ],
+                    new ListTile(
+                      leading: const Icon(Icons.contact_phone),
+                      title: textFormFieldFunction(
+                          'Teléfonos',
+                          'Teléfonos separado por comas',
+                          tf_telefono,
+                          'Por favor, ingresa número(s) telefónico(s).'),
+                    ),
+                    new ListTile(
+                      leading: const Icon(Icons.contact_mail),
+                      title: textFormFieldFunction(
+                          'E-mails',
+                          'E-mails separado por comas.',
+                          tf_email,
+                          'Por favor, ingresa correo(s) electrónico(s).'),
+                    ),
+                    new ListTile(
+                      leading: const Icon(Icons.category),
+                      title: textFormFieldFunction(
+                          'Categorías',
+                          'Ej: cocineros, música, ingenieros...',
+                          tf_categoria,
+                          'Por favor, ingresa al menos 1 categoría.'),
+                    ),
+                  ],
+                ),
               ),
             ),
-              ),
           ),
         ),
       ),
-      backgroundColor: Colors.green,
+      //backgroundColor: Colors.green,
     );
   }
 
