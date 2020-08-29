@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:izijob/clases/empleo.dart';
 import 'package:izijob/publicarEmpleo.dart';
 
+import 'DetailEmpleo.dart';
+
 class EmpleoVista extends StatefulWidget {
   @override
   _EmpleoVistaState createState() => _EmpleoVistaState();
@@ -94,12 +96,13 @@ class _EmpleoVistaState extends State<EmpleoVista> {
               : ListView.builder(
                   itemCount: empleoList.length,
                   itemBuilder: (_, index) {
-                    return postsEmpleo(
-                        empleoList[index].titulo,
+                    return postsEmpleo(empleoList[index]
+                        /*empleoList[index].titulo,
                         empleoList[index].fechaPublicado,
                         empleoList[index].descripcion,
                         empleoList[index].categoria,
-                        empleoList[index].vacantes);
+                        empleoList[index].vacantes*/
+                        );
                   })),
 
       floatingActionButton: FloatingActionButton(
@@ -116,13 +119,20 @@ class _EmpleoVistaState extends State<EmpleoVista> {
     );
   }
 
-  Widget postsEmpleo(String titulo, String fecha, String descripcion,
-      String categoria, String vacantes) {
+  Widget postsEmpleo(Empleo empleo) {
     return Card(
       elevation: 10.0,
-      margin: EdgeInsets.all(14.0),
-      child: Container(
-        padding: EdgeInsets.all(14.0),
+      margin: EdgeInsets.all(14.0),  
+      child: InkWell(
+        onTap: () {
+        Navigator.push(context,
+          MaterialPageRoute(
+            builder: (context) => DetailEmpleo(empleo: empleo),
+          ),
+        );
+      },
+        child:  Container(
+        padding: EdgeInsets.all(14.0),        
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -130,44 +140,57 @@ class _EmpleoVistaState extends State<EmpleoVista> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  titulo,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  empleo.titulo,
+                  style: TextStyle(
+                        fontFamily: 'Varela',
+                        fontSize: 21.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                  //style: Theme.of(context).textTheme.subtitle1,
                   textAlign: TextAlign.center,
-                  
                 ),
                 Text(
-                  fecha,
+                  empleo.fechaPublicado,
                   style: Theme.of(context).textTheme.subtitle2,
                   textAlign: TextAlign.center,
                 )
               ],
             ),
-            SizedBox(height: 15.0,),
+            SizedBox(
+              height: 15.0,
+            ),
             Text(
-              descripcion,
+              empleo.descripcion,
               style: Theme.of(context).textTheme.bodyText2,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(
+              height: 10.0,
+            ),
             Text(
-              "Categoría: "+categoria,
+              "Categoría: " + empleo.categoria,
               style: Theme.of(context).textTheme.caption,
               textAlign: TextAlign.left,
             ),
-            SizedBox(height: 10.0,),
+            SizedBox(
+              height: 10.0,
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-              "Vacantes: "+vacantes,
-              style: Theme.of(context).textTheme.caption,
-              
-            ),
-
+                "Vacantes: " + empleo.vacantes,
+                style: Theme.of(context).textTheme.caption,
+                /*style: TextStyle(
+                        fontFamily: 'Varela',
+                        fontSize: 21.0,
+                      )*/
+              ),
             )
-            
           ],
         ),
-      ),
-    );
+      ), 
+    
+      )    
+      );
   }
 }
