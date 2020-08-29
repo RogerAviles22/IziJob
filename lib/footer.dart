@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:izijob/empleoVista.dart';
-import 'package:izijob/cachuelo.dart';
+import 'package:izijob/cachueloVista.dart';
 import 'package:izijob/contactar.dart';
 
 class Footer extends StatefulWidget {
@@ -12,7 +12,7 @@ class Footer extends StatefulWidget {
 
 class _FooterState extends State<Footer> {
   int _currentIndex = 0;
-  final List<Widget> _children = [ EmpleoVista(), Cachuelo(), Contactar()];
+  final List<Widget> _children = [EmpleoVista(), CachueloVista(), Contactar()];
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +28,15 @@ class _FooterState extends State<Footer> {
             title: new Text('Empleo'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.monetization_on), 
-              title: Text('Cachuelo')),
+              icon: Icon(Icons.monetization_on), title: Text('Cachuelo')),
           BottomNavigationBarItem(
             icon: new Icon(Icons.call),
             title: new Text('Contactar'),
           ),
         ],
         selectedItemColor: Colors.amber[900],
-        backgroundColor : Colors.blue[900],
-        unselectedItemColor : Colors.white,
+        backgroundColor: Colors.blue[900],
+        unselectedItemColor: Colors.white,
       ),
     );
   }
