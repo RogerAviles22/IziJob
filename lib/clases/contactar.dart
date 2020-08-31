@@ -6,7 +6,8 @@ class Contacto{
   servicio,
   telefono,
   correo,
-  categoria,
+  categoria;
+  int
   idUser;
 
   Contacto( this.nombre, this.edad, this.profesion, this.servicio, this.telefono, this.correo, this.categoria,this.idUser);
