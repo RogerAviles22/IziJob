@@ -1,50 +1,55 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:izijob/clases/contactar.dart';
+import 'package:izijob/publicarContacto.dart';
+
 import 'DetailContactar.dart';
-import 'publicarContacto.dart';
 
 class ContactarVista extends StatefulWidget {
   @override
-  _ContactarState createState() => _ContactarState();
+  _ContactarVistaState createState() => _ContactarVistaState();
 }
 
-class _ContactarState extends State<ContactarVista> {
-  List<Contactar> contactarlist = [];
-  List<Contactar> contactosFiltrados =[];
+class _ContactarVistaState extends State<ContactarVista> {
+  var count = 0;
+  List<Contacto> contactarlist = [];
+  List<Contacto> contactosFiltrados =[];
   bool busqueda = false;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-        DatabaseReference contactoRef =
+    DatabaseReference cachueloRef =
         FirebaseDatabase.instance.reference().child("Contacto");
-      contactoRef.once().then((DataSnapshot snap){
-        var keys = snap.value.keys;
-        var data = snap.value;
-        contactarlist.clear();
+    cachueloRef.once().then((DataSnapshot snap) {
+      var keys = snap.value.keys;
+      var data = snap.value;
+      contactarlist.clear();
 
-        for(var key in keys){
-          Contactar contactar = Contactar(
-          data[key]['idContactar'],
-          data[key]['nombre'],
-          data[key]['edad'],
-          data[key]['profesion'],
-          data[key]['servicio'],
-          data[key]['telefono'],
-          data[key]['correo'],
-          data[key]['categoria'],
-          data[key]['idUser']
-          );
-          setState(() {
-          contactarlist.add(contactar);
-          contactosFiltrados.add(contactar);
-          //contactarlist.sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
-          //filteredEmpleoList.sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+      for (var individualKey in keys) {
+        count+=1;
+        Contacto cachuelo = Contacto(
+            data[individualKey]['nombre'],
+            data[individualKey]['edad'],
+            data[individualKey]['profesion'],
+            data[individualKey]['servicio'],
+            data[individualKey]['telefono'],
+            data[individualKey]['correo'],
+            data[individualKey]['categoria'],
+            data[individualKey]['idUser'],
+            );
+
+        //Agrega y ordena
+        setState(() {
+          contactarlist.add(cachuelo);
+          contactosFiltrados.add(cachuelo);
+          //cachueloList
+            //  .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+          //filteredCachueloList
+            //  .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
         });
-        }
       }
-      );  
+    });
   }
   void _filterContactos(value) {
     setState(() {
@@ -55,94 +60,95 @@ class _ContactarState extends State<ContactarVista> {
     });
   }
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        
-        backgroundColor : Colors.blue[900],
-        centerTitle: true,
-        title: !busqueda
-              ? Text('Contactar')
-                          : TextField(
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      
+      backgroundColor : Colors.blue[900],
+      centerTitle: true,
+      title: !busqueda
+            ? Text('Contactar')
+            : TextField(
                 onChanged: (value) {
                   _filterContactos(value);
+              },
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                  hintText: "Filtra por Categoría",
+                  hintStyle: TextStyle(color: Colors.white)),
+            ),
+      actions: <Widget>[
+        busqueda
+            ? IconButton(
+                icon: Icon(Icons.cancel),
+                onPressed: () {
+                  setState(() {
+                    this.busqueda = false;
+                    contactosFiltrados = contactarlist;
+                  });
                 },
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    icon: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                    hintText: "Filtra por Categoría",
-                    hintStyle: TextStyle(color: Colors.white)),
-              ),
-              actions: <Widget>[
-          busqueda
-              ? IconButton(
-                  icon: Icon(Icons.cancel),
-                  onPressed: () {
-                    setState(() {
-                      this.busqueda = false;
-                      contactosFiltrados = contactarlist;
-                    });
-                  },
-                )
-              : IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    setState(() {
-                      this.busqueda = true;
-                    });
-                  },
-                )
-        ],
-      ),
-            body: Container(
-          //padding: const EdgeInsets.all(5.0),
-          child: contactosFiltrados.length == 0
-              ? Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("No hay información que ver",
-                            style: TextStyle(
-                              fontFamily: 'Varela',
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        CircularProgressIndicator()
-                      ]),
-                )
-              : ListView.builder(
-                  itemCount: contactosFiltrados.length,
-                  itemBuilder: (_, index) {
-                    return postsEmpleo(contactosFiltrados[index]
-                        /*empleoList[index].titulo,
-                        empleoList[index].fechaPublicado,
-                        empleoList[index].descripcion,
-                        empleoList[index].categoria,
-                        empleoList[index].vacantes*/
-                        );
-                  })),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor : Colors.blue[900],
-        onPressed: (){     
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return PublicarContacto();
-          }));     
-        },
-        child: const Icon(Icons.add),
-      ),  
-      //backgroundColor : Colors.green,
-    
-      //bottomNavigationBar: Footer()
-      );
-  }
+              )
+            : IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  setState(() {
+                    this.busqueda = true;
+                  });
+                },
+              )
+      ],
+    ),
+    body: Container(
+        //padding: const EdgeInsets.all(5.0),
+        child: contactarlist.length == 0
+            ? Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("No hay información que ver " + count.toString(),
+                          style: TextStyle(
+                            fontFamily: 'Varela',
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      CircularProgressIndicator()
+                    ]),
+              )
+            : ListView.builder(
+                itemCount: contactosFiltrados.length,
+                itemBuilder: (_, index) {
+                  return postsEmpleo(contactosFiltrados[index]
+                      /*empleoList[index].titulo,
+                      empleoList[index].fechaPublicado,
+                      empleoList[index].descripcion,
+                      empleoList[index].categoria,
+                      empleoList[index].vacantes*/
+                      );
+                })),
+    floatingActionButton: FloatingActionButton(
+      backgroundColor : Colors.blue[900],
+      onPressed: (){     
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return PublicarContacto();
+        }));     
+      },
+      child: const Icon(Icons.add),
+    ),  
+    //backgroundColor : Colors.green,
+  
+    //bottomNavigationBar: Footer()
+    );
+}
 
-    Widget postsEmpleo(Contactar contacto) {
+    Widget postsEmpleo(Contacto contacto) {
     return Card(
         elevation: 10.0,
         margin: EdgeInsets.all(14.0),

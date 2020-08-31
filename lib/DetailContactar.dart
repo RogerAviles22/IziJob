@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:izijob/clases/contactar.dart';
 
 class DetailContactar extends StatelessWidget{
-  final Contactar contacto;
+  final Contacto contacto;
 
   DetailContactar({Key key, @required this.contacto }) : super(key: key);
 

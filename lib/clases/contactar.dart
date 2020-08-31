@@ -1,5 +1,5 @@
-class Contactar{
-  String idContactar,
+class Contacto{
+  String 
   nombre,
   edad,
   profesion,
@@ -9,5 +9,5 @@ class Contactar{
   categoria,
   idUser;
 
-  Contactar(this.idContactar, this.nombre, this.edad, this.profesion, this.servicio, this.telefono, this.correo, this.categoria,this.idUser);
+  Contacto( this.nombre, this.edad, this.profesion, this.servicio, this.telefono, this.correo, this.categoria,this.idUser);
 } 

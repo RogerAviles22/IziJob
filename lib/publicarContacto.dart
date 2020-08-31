@@ -199,7 +199,6 @@ class _PublicarContactoState extends State<PublicarContacto>{
       "categoria": tfcategoria,
       "profesion": tfprofesion,
       "servicio": tfservicio,
-      
       "idUser": 1
     };
     print(data);
