@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 //import 'package:intl/intl.dart';
 import 'package:izijob/footer.dart';
+import 'package:izijob/sendmail.dart';
 
 class PublicarContacto extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _PublicarContactoState extends State<PublicarContacto>{
               Icons.check,
               color: Colors.white,
             ),
-            onPressed: uploadStatusContacto,
+            onPressed: metodos,
           )
         ],
       
@@ -172,6 +173,12 @@ class _PublicarContactoState extends State<PublicarContacto>{
         ),
       ),);
   }
+
+  void metodos(){
+    uploadStatusContacto();
+    enviarMail();
+  }
+
   void uploadStatusContacto() async {
     if (validarForm()) {
       guardarToDatabase();
