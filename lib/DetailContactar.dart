@@ -8,7 +8,7 @@ class DetailContactar extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(appBar: AppBar(title: Text("${this.contacto.nombre}," + "${this.contacto.edad}" +" años"),
+    return Scaffold(appBar: AppBar(title: Text("${this.contacto.nombre}," + "${this.contacto.profesion}" ),
     backgroundColor: Colors.blue[900],),
     body: ListView(padding: EdgeInsets.all(10.0),
     children: <Widget>[

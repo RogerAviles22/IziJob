@@ -1,16 +1,16 @@
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 
-void enviarMail() async{
+void enviarMail(String email) async{
   final smtpServer = gmail('izijoblp@gmail.com', "Lebron23\$");
   final message = Message()
     ..from = Address('izijoblp@gmail.com', 'IZIJOB')
-    ..recipients.add('victormoyanosalazar@gmail.com')
-    ..ccRecipients.addAll(['victormoyanosalazar@gmail.com'])
-    ..bccRecipients.add(Address('victormoyanosalazar@gmail.com'))
+    ..recipients.add(email)
+    ..ccRecipients.addAll([email])
+    ..bccRecipients.add(Address(email))
     ..subject = '¡Bienvenido a IziJob! 😀 La fecha de tu registro es: ${DateTime.now()}'
-    ..text = 'Pilas con esa plata.\nVergeles si responde.'
-    ..html = "<h1>Estas advertido</h1>\n<p>Cuidado pana! </p>";
+    ..text = 'Pilas .\nVergeles si responde.'
+    ..html = "<h1>Bienvenido a IziJob!</h1>\n<p>Pronto el trabajo de tu sueño te contactará!</p>";
 
     try {
     final sendReport = await send(message, smtpServer);

@@ -1,6 +1,6 @@
 class Usuario {
-  String idUser, 
-  nombre, 
+  int idUser;
+  String nombre, 
   usuario, 
   fechaNacimiento, 
   clave, 

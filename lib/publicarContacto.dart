@@ -176,7 +176,7 @@ class _PublicarContactoState extends State<PublicarContacto>{
 
   void metodos(){
     uploadStatusContacto();
-    enviarMail();
+    enviarMail(tfcorreo);
   }
 
   void uploadStatusContacto() async {
@@ -190,12 +190,6 @@ class _PublicarContactoState extends State<PublicarContacto>{
   }
 
     void guardarToDatabase() {
-    // var dbTimeKey = DateTime.now();
-    // var formatDate = DateFormat('d/M/y');
-    // var formatTime = new DateFormat.jm();
-
-    // String date = formatDate.format(dbTimeKey);
-    // String time = formatTime.format(dbTimeKey);
 
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     var data = {

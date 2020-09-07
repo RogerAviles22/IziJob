@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:izijob/footer.dart';
+//mport 'package:izijob/registroVista.dart';
 
 void main() {
   runApp(MyApp());
