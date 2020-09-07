@@ -5,6 +5,8 @@ import 'package:izijob/publicarCachuelo.dart';
 
 import 'DetailCachuelo.dart';
 
+import 'globals.dart' as globals;
+
 class CachueloVista extends StatefulWidget {
   @override
   _CachueloVistaState createState() => _CachueloVistaState();
@@ -155,7 +157,9 @@ class _CachueloVistaState extends State<CachueloVista> {
                         );
                   })),
 
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: botonCachuelo(),
+
+      /*floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue[900],
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -163,10 +167,25 @@ class _CachueloVistaState extends State<CachueloVista> {
           }));
         },
         child: const Icon(Icons.add),
-      ),
+      ),*/
       //backgroundColor: Colors.green,
       //bottomNavigationBar: Footer()
     );
+  }
+
+  Widget botonCachuelo() {
+    if (globals.isLoggedIn) {
+      return FloatingActionButton(
+        backgroundColor: Colors.blue[900],
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return PublicarCachuelo();
+            //return Login();
+          }));
+        },
+        child: const Icon(Icons.add),
+      );
+    }
   }
 
   Widget postsCachuelo(Cachuelo cachuelo) {

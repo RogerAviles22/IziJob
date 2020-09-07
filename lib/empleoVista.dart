@@ -5,6 +5,8 @@ import 'package:izijob/publicarEmpleo.dart';
 
 import 'DetailEmpleo.dart';
 
+import 'globals.dart' as globals;
+
 class EmpleoVista extends StatefulWidget {
   @override
   _EmpleoVistaState createState() => _EmpleoVistaState();
@@ -45,10 +47,11 @@ class _EmpleoVistaState extends State<EmpleoVista> {
         setState(() {
           empleoList.add(empleo);
           filteredEmpleoList.add(empleo);
-          empleoList.sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
-          filteredEmpleoList.sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+          empleoList
+              .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+          filteredEmpleoList
+              .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
         });
-
       }
     });
   }
@@ -136,7 +139,9 @@ class _EmpleoVistaState extends State<EmpleoVista> {
                         );
                   })),
 
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: botonEmpleo(),
+
+      /*floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue[900],
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -144,10 +149,26 @@ class _EmpleoVistaState extends State<EmpleoVista> {
           }));
         },
         child: const Icon(Icons.add),
-      ),
+      ),*/
       //backgroundColor: Colors.green,
       //bottomNavigationBar: Footer()
     );
+  }
+
+  Widget botonEmpleo() {
+    if (globals.isLoggedIn) {
+      return FloatingActionButton(
+        backgroundColor: Colors.blue[900],
+        onPressed: () {
+          if (globals.isLoggedIn) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return PublicarEmpleo();
+            }));
+          }
+        },
+        child: const Icon(Icons.add),
+      );
+    }
   }
 
   Widget postsEmpleo(Empleo empleo) {

@@ -5,6 +5,8 @@ import 'package:izijob/publicarContacto.dart';
 
 import 'DetailContactar.dart';
 
+import 'globals.dart' as globals;
+
 class ContactarVista extends StatefulWidget {
   @override
   _ContactarVistaState createState() => _ContactarVistaState();
@@ -13,7 +15,7 @@ class ContactarVista extends StatefulWidget {
 class _ContactarVistaState extends State<ContactarVista> {
   var count = 0;
   List<Contacto> contactarlist = [];
-  List<Contacto> contactosFiltrados =[];
+  List<Contacto> contactosFiltrados = [];
   bool busqueda = false;
 
   @override
@@ -27,30 +29,31 @@ class _ContactarVistaState extends State<ContactarVista> {
       contactarlist.clear();
 
       for (var individualKey in keys) {
-        count+=1;
+        count += 1;
         Contacto cachuelo = Contacto(
-            data[individualKey]['nombre'],
-            data[individualKey]['edad'],
-            data[individualKey]['profesion'],
-            data[individualKey]['servicio'],
-            data[individualKey]['telefono'],
-            data[individualKey]['correo'],
-            data[individualKey]['categoria'],
-            data[individualKey]['idUser'],
-            );
+          data[individualKey]['nombre'],
+          data[individualKey]['edad'],
+          data[individualKey]['profesion'],
+          data[individualKey]['servicio'],
+          data[individualKey]['telefono'],
+          data[individualKey]['correo'],
+          data[individualKey]['categoria'],
+          data[individualKey]['idUser'],
+        );
 
         //Agrega y ordena
         setState(() {
           contactarlist.add(cachuelo);
           contactosFiltrados.add(cachuelo);
           //cachueloList
-            //  .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+          //  .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
           //filteredCachueloList
-            //  .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+          //  .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
         });
       }
     });
   }
+
   void _filterContactos(value) {
     setState(() {
       contactosFiltrados = contactarlist
@@ -60,80 +63,81 @@ class _ContactarVistaState extends State<ContactarVista> {
     });
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      
-      backgroundColor : Colors.blue[900],
-      centerTitle: true,
-      title: !busqueda
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue[900],
+        centerTitle: true,
+        title: !busqueda
             ? Text('Contactar')
             : TextField(
                 onChanged: (value) {
                   _filterContactos(value);
-              },
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  hintText: "Filtra por Categoría",
-                  hintStyle: TextStyle(color: Colors.white)),
-            ),
-      actions: <Widget>[
-        busqueda
-            ? IconButton(
-                icon: Icon(Icons.cancel),
-                onPressed: () {
-                  setState(() {
-                    this.busqueda = false;
-                    contactosFiltrados = contactarlist;
-                  });
                 },
-              )
-            : IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  setState(() {
-                    this.busqueda = true;
-                  });
-                },
-              )
-      ],
-    ),
-    body: Container(
-        //padding: const EdgeInsets.all(5.0),
-        child: contactarlist.length == 0
-            ? Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text("No hay información que ver " + count.toString(),
-                          style: TextStyle(
-                            fontFamily: 'Varela',
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      CircularProgressIndicator()
-                    ]),
-              )
-            : ListView.builder(
-                itemCount: contactosFiltrados.length,
-                itemBuilder: (_, index) {
-                  return postsEmpleo(contactosFiltrados[index]
-                      /*empleoList[index].titulo,
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    hintText: "Filtra por Categoría",
+                    hintStyle: TextStyle(color: Colors.white)),
+              ),
+        actions: <Widget>[
+          busqueda
+              ? IconButton(
+                  icon: Icon(Icons.cancel),
+                  onPressed: () {
+                    setState(() {
+                      this.busqueda = false;
+                      contactosFiltrados = contactarlist;
+                    });
+                  },
+                )
+              : IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      this.busqueda = true;
+                    });
+                  },
+                )
+        ],
+      ),
+      body: Container(
+          //padding: const EdgeInsets.all(5.0),
+          child: contactarlist.length == 0
+              ? Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("No hay información que ver " + count.toString(),
+                            style: TextStyle(
+                              fontFamily: 'Varela',
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            )),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        CircularProgressIndicator()
+                      ]),
+                )
+              : ListView.builder(
+                  itemCount: contactosFiltrados.length,
+                  itemBuilder: (_, index) {
+                    return postsEmpleo(contactosFiltrados[index]
+                        /*empleoList[index].titulo,
                       empleoList[index].fechaPublicado,
                       empleoList[index].descripcion,
                       empleoList[index].categoria,
                       empleoList[index].vacantes*/
-                      );
-                })),
-    floatingActionButton: FloatingActionButton(
+                        );
+                  })),
+
+      floatingActionButton: botonContactar(),
+      /*floatingActionButton: FloatingActionButton(
       backgroundColor : Colors.blue[900],
       onPressed: (){     
           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -141,14 +145,27 @@ Widget build(BuildContext context) {
         }));     
       },
       child: const Icon(Icons.add),
-    ),  
-    //backgroundColor : Colors.green,
-  
-    //bottomNavigationBar: Footer()
+    ),  */
+      //backgroundColor : Colors.green,
+      //bottomNavigationBar: Footer()
     );
-}
+  }
 
-    Widget postsEmpleo(Contacto contacto) {
+  Widget botonContactar() {
+    if (globals.isLoggedIn) {
+      return FloatingActionButton(
+        backgroundColor: Colors.blue[900],
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return PublicarContacto();
+          }));
+        },
+        child: const Icon(Icons.add),
+      );
+    }
+  }
+
+  Widget postsEmpleo(Contacto contacto) {
     return Card(
         elevation: 10.0,
         margin: EdgeInsets.all(14.0),
