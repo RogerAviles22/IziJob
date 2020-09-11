@@ -16,7 +16,7 @@ class Login extends StatefulWidget {
 //enum SingingCharacter { empleo, cachuelo }
 
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
+  final _formLogin = GlobalKey<FormState>();
   //SingingCharacter _character = SingingCharacter.empleo;
   final globalKey = GlobalKey<ScaffoldState>();
 
@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Form(
-              key: _formKey,
+              key: _formLogin,
               child: Scrollbar(
                 child: ListView(
                   children: <Widget>[
@@ -102,14 +102,13 @@ class _LoginState extends State<Login> {
                       child: Text("Ingresar"),
                       splashColor: Colors.amber,
                       color: Colors.blueAccent,
-                      onPressed: () {
+                      onPressed: ingresarMain/*() {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          //return PublicarCachuelo();
                           globals.isLoggedIn = true;
                           return Footer();
                         }));
-                      },
+                      }*/,
                     ),
                     SizedBox(height: 20.0),
                     new RaisedButton(
@@ -147,9 +146,29 @@ class _LoginState extends State<Login> {
           ),
         ),
       ),
-      //backgroundColor: Colors.green,
     );
   }
+
+  //Valida que esté todos los campos llenos
+  bool validarForm() {
+    final form = _formLogin.currentState;
+    if (form.validate()) {
+      // Si el formulario es válido, queremos mostrar un Snackbar
+      //form.save();
+      return true;
+    }
+    return false;
+  }
+
+  void ingresarMain() {
+    if (validarForm()) {      
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        globals.isLoggedIn = true;
+        return Footer();
+      }));
+    }
+  }
+
 /*
   //Guardamos texto
   void guardarToDatabase() {
