@@ -60,7 +60,7 @@ class _CachueloVistaState extends State<CachueloVista> {
           cachueloRef
               .child(individualKey)
               .child("estado")
-              .push()
+              //.push()
               .set("Inactivo");
         } else if (int.parse(ano2) == int.parse(ano)) {
           if (int.parse(mes2) > int.parse(mes)) {
@@ -68,7 +68,7 @@ class _CachueloVistaState extends State<CachueloVista> {
             cachueloRef
                 .child(individualKey)
                 .child("estado")
-                .push()
+                //.push()
                 .set("Inactivo");
           } else if (int.parse(mes2) == int.parse(mes)) {
             if (int.parse(dia2) - int.parse(dia) >= 3) {
@@ -76,7 +76,7 @@ class _CachueloVistaState extends State<CachueloVista> {
               cachueloRef
                   .child(individualKey)
                   .child("estado")
-                  .push()
+                  //.push()
                   .set("Inactivo");
             }
           }
