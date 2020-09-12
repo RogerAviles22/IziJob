@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:izijob/clases/cachuelo.dart';
 import 'package:izijob/publicarCachuelo.dart';
+import 'package:intl/intl.dart';
 
 import 'DetailCachuelo.dart';
 
@@ -39,14 +40,60 @@ class _CachueloVistaState extends State<CachueloVista> {
             data[individualKey]['tiempoP'],
             data[individualKey]['idUser']);
 
+        List<String> fecha = cachuelo.fechaPublicado.split("/");
+        String dia = fecha[0];
+        String mes = fecha[1];
+        String ano = fecha[2];
+
+        var dbTimeKey = DateTime.now();
+        var formatDate = DateFormat('d/M/y');
+        //var formatTime = new DateFormat.jm();
+
+        String date = formatDate.format(dbTimeKey);
+        List<String> fecha2 = date.split("/");
+        String dia2 = fecha2[0];
+        String mes2 = fecha2[1];
+        String ano2 = fecha2[2];
+
+        if (int.parse(ano2) > int.parse(ano)) {
+          cachuelo.estado = "Inactivo";
+          cachueloRef
+              .child(individualKey)
+              .child("estado")
+              .push()
+              .set("Inactivo");
+        } else if (int.parse(ano2) == int.parse(ano)) {
+          if (int.parse(mes2) > int.parse(mes)) {
+            cachuelo.estado = "Inactivo";
+            cachueloRef
+                .child(individualKey)
+                .child("estado")
+                .push()
+                .set("Inactivo");
+          } else if (int.parse(mes2) == int.parse(mes)) {
+            if (int.parse(dia2) - int.parse(dia) >= 3) {
+              cachuelo.estado = "Inactivo";
+              cachueloRef
+                  .child(individualKey)
+                  .child("estado")
+                  .push()
+                  .set("Inactivo");
+            }
+          }
+        }
+
+        //String time = formatTime.format(dbTimeKey);
+
         //Agrega y ordena
         setState(() {
-          cachueloList.add(cachuelo);
-          filteredCachueloList.add(cachuelo);
-          cachueloList
-              .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
-          filteredCachueloList
-              .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+          if (cachuelo.estado == "Activo") {
+            cachueloList.add(cachuelo);
+            filteredCachueloList.add(cachuelo);
+            cachueloList
+                .sort((c, d) => d.fechaPublicado.compareTo(c.fechaPublicado));
+            filteredCachueloList
+                .sort((c, d) => d.fechaPublicado.compareTo(c.fechaPublicado));
+          }
         });
       }
     });
@@ -220,6 +267,7 @@ class _CachueloVistaState extends State<CachueloVista> {
                       textAlign: TextAlign.center,
                     ),
                     Text(
+                      //cachuelo.fechaPublicado.split("/")[0],
                       cachuelo.fechaPublicado,
                       style: Theme.of(context).textTheme.subtitle2,
                       textAlign: TextAlign.center,
@@ -229,6 +277,14 @@ class _CachueloVistaState extends State<CachueloVista> {
                 SizedBox(
                   height: 15.0,
                 ),
+                /*Text(
+                  cachuelo.tiempoPublicado.split(":")[0],
+                  style: Theme.of(context).textTheme.subtitle2,
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),*/
                 Text(
                   cachuelo.descripcion,
                   style: Theme.of(context).textTheme.bodyText2,

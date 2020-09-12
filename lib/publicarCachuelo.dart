@@ -206,7 +206,10 @@ class _PublicarCachueloState extends State<PublicarCachuelo> {
     var formatTime = new DateFormat.jm();
 
     String date = formatDate.format(dbTimeKey);
+    //print (date);
+
     String time = formatTime.format(dbTimeKey);
+    //print (time);
 
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     var data = {

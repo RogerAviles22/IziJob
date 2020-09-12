@@ -102,15 +102,17 @@ class _LoginState extends State<Login> {
                       child: Text("Ingresar"),
                       splashColor: Colors.amber,
                       color: Colors.blueAccent,
-                      onPressed: ingresarMain/*() {
+                      onPressed:
+                          ingresarMain /*() {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           globals.isLoggedIn = true;
                           return Footer();
                         }));
-                      }*/,
+                      }*/
+                      ,
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 10.0),
                     new RaisedButton(
                       disabledColor: Colors.amber,
                       child: Text("Registrarse"),
@@ -124,7 +126,7 @@ class _LoginState extends State<Login> {
                         }));
                       },
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 10.0),
                     new RaisedButton(
                       disabledColor: Colors.amber,
                       child: Text("Ingresar como invitado"),
@@ -161,7 +163,7 @@ class _LoginState extends State<Login> {
   }
 
   void ingresarMain() {
-    if (validarForm()) {      
+    if (validarForm()) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         globals.isLoggedIn = true;
         return Footer();
