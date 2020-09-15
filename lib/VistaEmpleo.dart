@@ -158,6 +158,7 @@ class _EmpleoVistaState extends State<EmpleoVista> {
         child: const Icon(Icons.add),
       );
     }
+    return Row();
   }
 
   Widget postsEmpleo(Empleo empleo) {

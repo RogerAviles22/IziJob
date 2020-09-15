@@ -163,6 +163,7 @@ class _ContactarVistaState extends State<ContactarVista> {
         child: const Icon(Icons.add),
       );
     }
+    return Row();
   }
 
   Widget postsEmpleo(Contacto contacto) {

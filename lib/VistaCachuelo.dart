@@ -175,6 +175,7 @@ class _CachueloVistaState extends State<CachueloVista> {
         child: const Icon(Icons.add),
       );
     }
+    return Row();
   }
 
   Widget postsCachuelo(Cachuelo cachuelo) {
