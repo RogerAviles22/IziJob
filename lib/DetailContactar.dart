@@ -1,44 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:izijob/clases/contactar.dart';
 
-class DetailContactar extends StatelessWidget{
+class DetailContactar extends StatelessWidget {
   final Contacto contacto;
 
-  DetailContactar({Key key, @required this.contacto }) : super(key: key);
+  DetailContactar({Key key, @required this.contacto}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
-    return Scaffold(appBar: AppBar(title: Text("${this.contacto.nombre}," + "${this.contacto.profesion}" ),
-    backgroundColor: Colors.blue[900],),
-    body: ListView(padding: EdgeInsets.all(10.0),
-    children: <Widget>[
-      Row(children: [
-            const Icon(Icons.description),
-            SizedBox(width: 15),
-            Text(
-              "Descripción: ",
-              style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-            )
-      ],),
-          SizedBox(height: 5),
-          Text("Quedaría mejor una descripcion sobre la persona que aparece en este menu"),
-          SizedBox(height: 15),
-              Text(
-            "Contactos: ",
-            style: TextStyle(
-              fontFamily: 'Varela',
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-                    SizedBox(height: 5),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("${this.contacto.nombre}," + "${this.contacto.profesion}"),
+        backgroundColor: Colors.blue[900],
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(30.0),
+        children: <Widget>[
           Row(
             children: [
-              const Icon(Icons.phone, size: 10,),
+              Icon(Icons.description, color: Colors.blue[800]),
+              SizedBox(width: 15),
+              Text(
+                "DESCRIPCIÓN",
+                style: TextStyle(
+                    fontFamily: 'Varela',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[800]),
+              )
+            ],
+          ),
+          SizedBox(height: 5),
+          Text(
+            "Quedaría mejor una descripcion sobre la persona que aparece en este menu",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 25),
+          Text(
+            "CONTACTOS",
+            style: TextStyle(
+                fontFamily: 'Varela',
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[800]),
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.phone, color: Colors.cyan[800]),
               SizedBox(width: 15),
               Text(
                 "${contacto.telefono}",
@@ -48,9 +58,10 @@ class DetailContactar extends StatelessWidget{
               )
             ],
           ),
-                    Row(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.mail),
+              Icon(Icons.mail, color: Colors.cyan[800]),
               SizedBox(width: 15),
               Text(
                 "${contacto.correo}",
@@ -60,65 +71,77 @@ class DetailContactar extends StatelessWidget{
               )
             ],
           ),
-          SizedBox(height: 15),
-            Text(
-              "Profesión: ",
-              style: TextStyle(
-              fontFamily: 'Varela',
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 5),
-          Row(children: [
-            const Icon(Icons.business_center),
-            SizedBox(width: 15),
-            Text(
-            "${contacto.profesion}",
+          SizedBox(height: 25),
+          Text(
+            "PROFESIÓN ",
             style: TextStyle(
+                fontFamily: 'Varela',
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[800]),
+          ),
+          SizedBox(height: 5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.business_center, color: Colors.blue[800]),
+              SizedBox(width: 15),
+              Text(
+                "${contacto.profesion}",
+                style: TextStyle(
                   fontFamily: 'Varela',
                 ),
+              )
+            ],
+          ),
+          SizedBox(height: 25),
+          Text(
+            "SERVICIOS",
+            style: TextStyle(
+                fontFamily: 'Varela',
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[800]),
+          ),
+          SizedBox(height: 5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.assignment, color: Colors.blue[800]),
+              SizedBox(width: 15),
+              Text(
+                "${contacto.servicio}",
+                style: TextStyle(
+                  fontFamily: 'Varela',
+                ),
+              )
+            ],
+          ),
+          SizedBox(height: 25),
+          Text(
+            "CATEGORÍAS ",
+            style: TextStyle(
+                fontFamily: 'Varela',
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[800]),
+          ),
+          SizedBox(height: 5),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.category, color: Colors.blue[800]),
+              SizedBox(width: 15),
+              Text(
+                "${contacto.categoria}",
+                style: TextStyle(
+                  fontFamily: 'Varela',
+                ),
+              )
+            ],
           )
-          ],),
-          SizedBox(height: 15),
-          Text("Servicios: ",
-          style: TextStyle(
-              fontFamily: 'Varela',
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 5),
-          Row(children: [
-            const Icon(Icons.assignment),
-            SizedBox(width: 15),
-            Text(
-              "${contacto.servicio}",
-                  style: TextStyle(
-                  fontFamily: 'Varela',
-                ),
-            )
-          ],),
-          SizedBox(height: 15),
-          Text("Categorías: ",
-          style: TextStyle(
-              fontFamily: 'Varela',
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 5),
-          Row(children: [
-            const Icon(Icons.category),
-            SizedBox(width: 15),
-            Text(
-              "${contacto.categoria}",
-                  style: TextStyle(
-                  fontFamily: 'Varela',
-                ),
-            )
-          ],)
-    ],)
-    ,);
-  } 
+        ],
+      ),
+    );
+  }
 }

@@ -14,37 +14,38 @@ class DetailCachuelo extends StatelessWidget {
         backgroundColor: Colors.blue[900],
       ),
       body: ListView(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(30.0),
         children: <Widget>[
           Row(
             children: [
-              const Icon(Icons.description),
+              Icon(Icons.description, color: Colors.blue[800]),
               SizedBox(width: 15),
               Text(
-                "Descripción: ",
+                "DESCRIPCIÓN ",
                 style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontFamily: 'Varela',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[800]),
               )
             ],
           ),
           SizedBox(height: 5),
-          Text("${cachuelo.descripcion}"),
-          SizedBox(height: 15),
+          Text("${cachuelo.descripcion}", textAlign: TextAlign.center),
+          SizedBox(height: 25),
           Text(
-            "Contactos: ",
+            "CONTACTOS",
             style: TextStyle(
-              fontFamily: 'Varela',
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
+                fontFamily: 'Varela',
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[800]),
           ),
           SizedBox(height: 5),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.phone),
+              Icon(Icons.phone, color: Colors.cyan[800]),
               SizedBox(width: 15),
               Text(
                 "${cachuelo.telefono}",
@@ -56,8 +57,9 @@ class DetailCachuelo extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.mail),
+              Icon(Icons.mail, color: Colors.cyan[800]),
               SizedBox(width: 15),
               Text(
                 "${cachuelo.email}",
@@ -67,35 +69,38 @@ class DetailCachuelo extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 25),
           Row(
             children: [
-              const Icon(Icons.category),
+              Icon(Icons.category, color: Colors.blue[800]),
               SizedBox(width: 15),
               Text(
-                "Categoría: ",
+                "CATEGORÍA",
                 style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontFamily: 'Varela',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[800]),
               )
             ],
           ),
           SizedBox(height: 5),
-          Text("${cachuelo.categoria}"),
-          SizedBox(height: 15),
+          Text(
+            "${cachuelo.categoria}",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 25),
           Row(
             children: [
-              const Icon(Icons.supervisor_account),
+              Icon(Icons.supervisor_account, color: Colors.blue[800]),
               SizedBox(width: 15),
               Text(
-                "Estado : ",
+                "ESTADO ",
                 style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontFamily: 'Varela',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue[800]),
               ),
               SizedBox(height: 5),
               Text("${cachuelo.estado}"),

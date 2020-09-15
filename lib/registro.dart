@@ -2,7 +2,6 @@
 //import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:izijob/login.dart';
 //import 'package:intl/intl.dart';
@@ -82,24 +81,6 @@ class _RegistroState extends State<Registro> {
                       ),
                     ),
                     new ListTile(
-                      leading: const Icon(Icons.calendar_today),
-                      title: DateTimeFormField(
-                        initialValue: initial,
-                        label: "Date Time",
-                        validator: (DateTime dateTime) {
-                          if (dateTime == null) {
-                            return "Date Time Required";
-                          }
-                          return null;
-                        },
-                        onSaved: (DateTime dateTime) {
-                          tfFecha =
-                              DateFormat('yyyy-MM-dd – kk:mm').format(dateTime);
-                          return tfFecha;
-                        },
-                      ),
-                    ),
-                    new ListTile(
                         leading: const Icon(Icons.email),
                         title: TextFormField(
                           decoration: InputDecoration(
@@ -125,7 +106,7 @@ class _RegistroState extends State<Registro> {
                         controller: _passcontroller,
                         validator: (value) {
                           if (value.isEmpty || value.length < 8) {
-                            return "¡Contraseña inválida!";
+                            return "Ingrese mínimo 8 caracteres";
                           }
                           return null;
                         },
@@ -175,6 +156,9 @@ class _RegistroState extends State<Registro> {
   }
 
   void guardarToDatabase() {
+    var dateTime = DateTime.now();
+    tfFecha = DateFormat('yyyy-MM-dd – kk:mm').format(dateTime);
+
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     var data = {
       "nombre": tfNombre,

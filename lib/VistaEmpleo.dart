@@ -48,9 +48,9 @@ class _EmpleoVistaState extends State<EmpleoVista> {
           empleoList.add(empleo);
           filteredEmpleoList.add(empleo);
           empleoList
-              .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+              .sort((a, b) => a.fechaPublicado.compareTo(b.fechaPublicado));
           filteredEmpleoList
-              .sort((a, b) => b.fechaPublicado.compareTo(a.fechaPublicado));
+              .sort((a, b) => a.fechaPublicado.compareTo(b.fechaPublicado));
         });
       }
     });
@@ -141,17 +141,6 @@ class _EmpleoVistaState extends State<EmpleoVista> {
 
       floatingActionButton: botonEmpleo(),
 
-      /*floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue[900],
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return PublicarEmpleo();
-          }));
-        },
-        child: const Icon(Icons.add),
-      ),*/
-      //backgroundColor: Colors.green,
-      //bottomNavigationBar: Footer()
     );
   }
 
@@ -196,8 +185,9 @@ class _EmpleoVistaState extends State<EmpleoVista> {
                       empleo.titulo,
                       style: TextStyle(
                         fontFamily: 'Varela',
-                        fontSize: 15.0,
+                        fontSize: 16.0,
                         fontWeight: FontWeight.bold,
+                        
                       ),
                       //style: Theme.of(context).textTheme.subtitle1,
                       textAlign: TextAlign.center,

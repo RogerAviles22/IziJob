@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:izijob/empleoVista.dart';
-import 'package:izijob/cachueloVista.dart';
-import 'package:izijob/contactarVista.dart';
+import 'package:izijob/VistaEmpleo.dart';
+import 'package:izijob/VistaCachuelo.dart';
+import 'package:izijob/VistaContactar.dart';
 
 class Footer extends StatefulWidget {
   @override

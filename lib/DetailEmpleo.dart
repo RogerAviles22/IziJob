@@ -14,71 +14,98 @@ class DetailEmpleo extends StatelessWidget {
         backgroundColor: Colors.blue[900],
       ),
       body: ListView(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(30.0),
         children: <Widget>[
           Row(
             children: [
-              const Icon(Icons.description),
+              Icon(Icons.description, color: Colors.blue[800]),
               SizedBox(width: 15),
               Text(
-                "Descripción: ",
+                "DESCRIPCIÓN ",
                 style: TextStyle(
                   fontFamily: 'Varela',
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
+                  color: Colors.blue[800],
                 ),
               )
             ],
           ),
-          SizedBox(height: 5),
-          Text("${empleo.descripcion}"),
-          SizedBox(height: 15),
+          SizedBox(height: 10),
+          Text(
+            "${empleo.descripcion}",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 25),
           Row(
             children: [
-              const Icon(Icons.star),
+              Icon(
+                Icons.star,
+                color: Colors.blue[800],
+              ),
               SizedBox(width: 15),
               Text(
-                "Experiencia: ",
+                "EXPERIENCIA",
                 style: TextStyle(
                   fontFamily: 'Varela',
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
+                  color: Colors.blue[800],
                 ),
               )
             ],
           ),
-          SizedBox(height: 5),
-          Text("${empleo.experiencia}"),
-          SizedBox(height: 15),
+          SizedBox(height: 10),
+          Text(
+            "${empleo.experiencia}",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 25),
           Row(
             children: [
-              const Icon(Icons.monetization_on),
+              Icon(Icons.monetization_on, color: Colors.blue[800]),
               SizedBox(width: 15),
               Text(
-                "Sueldo: ",
+                "SUELDO ",
                 style: TextStyle(
                   fontFamily: 'Varela',
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
+                  color: Colors.blue[800],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Text(
+            "${empleo.sueldo}",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 25),
+          Row(
+            children: [
+              Icon(
+                Icons.contacts,
+                color: Colors.blue[800],
+              ),
+              SizedBox(width: 15),
+              Text(
+                "CONTACTOS ",
+                style: TextStyle(
+                  fontFamily: 'Varela',
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue[800],
                 ),
               ),
             ],
           ),
           SizedBox(height: 5),
-          Text("${empleo.sueldo}"),
-          SizedBox(height: 15),
-          Text(
-            "Contactos: ",
-            style: TextStyle(
-              fontFamily: 'Varela',
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 5),
-          Row(
-            children: [
-              const Icon(Icons.phone),
+          Row(            
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[              
+              Icon(Icons.phone,
+                color: Colors.cyan[700]),
               SizedBox(width: 15),
               Text(
                 "${empleo.telefono}",
@@ -90,45 +117,59 @@ class DetailEmpleo extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Row(
+          mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.mail),
+              Icon(Icons.mail,
+                color: Colors.cyan[700]),
               SizedBox(width: 15),
               Text(
                 "${empleo.email}",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Varela',
                 ),
               )
             ],
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 25),
           Row(
             children: [
-              const Icon(Icons.category),
+              Icon(
+                Icons.category,
+                color: Colors.blue[800],
+              ),
               SizedBox(width: 15),
               Text(
-                "Categoría: ",
+                "CATEGORÍA",
                 style: TextStyle(
                   fontFamily: 'Varela',
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
+                  color: Colors.blue[800],
                 ),
               )
             ],
           ),
-          SizedBox(height: 5),
-          Text("${empleo.categoria}"),
-          SizedBox(height: 15),
+          SizedBox(height: 10),
+          Text(
+            "${empleo.categoria}",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 25),
           Row(
             children: [
-              const Icon(Icons.supervisor_account),
+              Icon(
+                Icons.supervisor_account,
+                color: Colors.blue[800],
+              ),
               SizedBox(width: 15),
               Text(
-                "Vacantes : ",
+                "VACANTES : ",
                 style: TextStyle(
                   fontFamily: 'Varela',
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
+                  color: Colors.blue[800],
                 ),
               ),
               SizedBox(height: 5),

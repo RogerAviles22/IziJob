@@ -101,8 +101,9 @@ class _LoginState extends State<Login> {
                       leading: const Icon(Icons.lock),
                       title: TextFormField(
                         controller: myControllerCon,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
+                        //keyboardType: TextInputType.multiline,
+                        obscureText: true,
+                        //maxLines: null,
                         decoration: InputDecoration(
                           labelText: 'Contraseña',
                         ),
@@ -128,7 +129,7 @@ class _LoginState extends State<Login> {
                       child: Text("Registrarse"),
                       splashColor: Colors.amber,
                       color: Colors.blueAccent,
-                      onPressed: () {
+                      onPressed: () {                        
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return Registro();
@@ -206,6 +207,8 @@ class _LoginState extends State<Login> {
   void ingresarMain() {
     if (validarForm()) {
       if (validarLogin() == "true") {
+        myController.clear();
+        myControllerCon.clear();
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           globals.isLoggedIn = true;
           return Footer();
