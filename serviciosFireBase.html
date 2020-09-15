@@ -22,8 +22,19 @@
 			</tr>
 		</thead>
 		<tbody>
+
       <tr>
-        <td><a>empleoVista</a></td>
+        <td>publicarUsuario</td>
+        <td>FirebaseDatabase.instance.reference().child("Usuario").push().set(data);</td>
+        <td>Publica los usuarios en la base de datos</td>
+      </tr>
+      <tr>
+        <td>usuariosRegistrados</td>
+        <td>FirebaseDatabase.instance.reference().child("Usuario");</td>
+        <td>Obtener los usuarios que se han registrado hasta el momento</td>
+      </tr>
+      <tr>
+        <td><a>VistaEmpleo</a></td>
         <td>FirebaseDatabase.instance.reference().child("Empleo")</td>
         <td>Obtener los detalles de los Empleos publicados</td>
       </tr>
@@ -33,7 +44,7 @@
         <td>Publicar los empleos en la base de datos</td>
       </tr>
       <tr>
-        <td>empleoVista/filtrarEmpleo</td>
+        <td>VistaEmpleo/filtrarEmpleo</td>
         <td>empleoList
           .where((empleos) =>
               empleos.categoria.toLowerCase().contains(value.toLowerCase()))
@@ -41,7 +52,7 @@
         <td>Filtra y carga en la lista aquellos empleos cuya categoría sea igual al value del TextFormField</td>
       </tr>
       <tr>
-        <td>cachueloVista</a></td>
+        <td>VistaCachuelo</a></td>
         <td>FirebaseDatabase.instance.reference().child("Cachuelo")</td>
         <td>Obtener los detalles de los Cachuelos publicados</td>
       </tr>
@@ -51,7 +62,7 @@
         <td>Publicar los cachuelos en la base de datos</td>
       </tr>
       <tr>
-        <td>cachueloVista/filtrarCachuelo</td>
+        <td>VistaCachuelo/filtrarCachuelo</td>
         <td>cachueloList
           .where((cachuelos) =>
               cachuelos.categoria.toLowerCase().contains(value.toLowerCase()))
@@ -59,7 +70,16 @@
         <td>Filtra y carga en la lista aquellos cachuelos cuya categoría sea igual al value del TextFormField</td>
       </tr>
       <tr>
-        <td>contactarVista</a></td>
+        <td>setear/cambiarEstado</td>
+        <td>cachueloRef.child(individualKey).child("estado").set("Inactivo");</td>
+        <td>Modifica el estado de los cachuelos de “Activo” a “Inactivo” cuando ya ha transcurrido un aproximado de 3 días.</td>
+      </tr>
+
+
+
+
+      <tr>
+        <td>VistaContactar</a></td>
         <td>FirebaseDatabase.instance.reference().child("Contacto")</td>
         <td>Obtiene los detalles de los Contactos publicados</td>
       </tr>      
@@ -69,7 +89,7 @@
         <td>Publica los contactos en la base de datos</td>
       </tr> 
       <tr>
-        <td>contactarVista/filtrarContacto</a></td>
+        <td>VistaContactar/filtrarContacto</a></td>
         <td>contactosFiltrados = contactarlist
           .where((contactos) =>
               contactos.categoria.toLowerCase().contains(value.toLowerCase()))
