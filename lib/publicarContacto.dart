@@ -1,8 +1,17 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 //import 'package:intl/intl.dart';
 import 'package:izijob/footer.dart';
+//import 'package:izijob/VistaContactar.dart';
 import 'package:izijob/sendmail.dart';
+
+//import 'VistaContactar.dart';
+
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
+}
 
 class PublicarContacto extends StatefulWidget {
   @override
@@ -11,15 +20,18 @@ class PublicarContacto extends StatefulWidget {
 
 class _PublicarContactoState extends State<PublicarContacto>{
   final _formkey = GlobalKey<FormState>();
+  TextEditingController _textEditingController = TextEditingController();
   final globalKey = GlobalKey<ScaffoldState>();
-
+  
   String tfnombre,
   tfedad,
   tfprofesion,
   tfservicio,
   tftelefono,
   tfcorreo,
-  tfcategoria;
+  tfcategoria,
+  tfDescripcion;
+
 
   Widget build(BuildContext context){
     return Scaffold(key: globalKey,
@@ -66,16 +78,33 @@ class _PublicarContactoState extends State<PublicarContacto>{
                         )),
                     new ListTile(
                       leading: const Icon(Icons.cake),
+                      
                       title: TextFormField(
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
+                        controller: _textEditingController,
+                        focusNode: AlwaysDisabledFocusNode(),
                         decoration: InputDecoration(
                           labelText: 'Edad',
                           hintText: 'Ej: Señor(a) de tal edad...',
                         ),
+                        onTap:(){ showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1819, 1),
+                          lastDate: DateTime(2121, 12),
+                        ).then((pickedDate) {
+                          String fecha = DateFormat('yyyy-MM-dd – kk:mm').format(pickedDate);
+                          _textEditingController.text = fecha.substring(0,10);
+                          //do whatever you want
+                        });},
                         validator: (value) {
+                          print(esAdult(value));
                           if (value.isEmpty) {
                             return 'Por favor, ingresa la edad';
+                          }
+                          if(!esAdult(value)){
+                            return 'Debe ser mayor de edad';
                           }
                           return null;
                         },
@@ -164,7 +193,26 @@ class _PublicarContactoState extends State<PublicarContacto>{
                           onSaved: (value) {
                             return tfservicio = value;
                           },
-                        )),                                               
+                        )),
+                    new ListTile(
+                      leading: const Icon(Icons.description),
+                      title: TextFormField(
+                        maxLines: 8,
+                        decoration: InputDecoration(
+                          labelText: "Descipción",
+                          hintText: 'Describe de la mejor manera tus aptitudes',
+
+                        ),
+                        validator: (value) {
+                            return value.isEmpty
+                                ? 'Por favor, ingresa al menos 1 servicio.'
+                                : null;
+                          },
+                          onSaved: (value) {
+                            return tfDescripcion = value;
+                          },
+                      )
+                    )                                                   
                   ],
                 ),
               ),
@@ -200,7 +248,8 @@ class _PublicarContactoState extends State<PublicarContacto>{
       "categoria": tfcategoria,
       "profesion": tfprofesion,
       "servicio": tfservicio,
-      "idUser": 1
+      "idUser": 1,
+      "descripcion": tfDescripcion
     };
     print(data);
     ref.child("Contacto").push().set(data);
@@ -233,5 +282,49 @@ class _PublicarContactoState extends State<PublicarContacto>{
       },
     );
   }
+
+  // _seleccionarFecha(BuildContext context)async{
+    
+  //       DateTime fechaSeleccionada = await showDatePicker(context: context,
+  //        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
+  //    firstDate: DateTime(2000), lastDate: DateTime(2100),
+  //    builder: (BuildContext context, Widget child) {
+  //         return Theme(
+  //           data: ThemeData.dark().copyWith(
+  //             colorScheme: ColorScheme.dark(
+  //               primary: Colors.deepPurple,
+  //               onPrimary: Colors.white,
+  //               surface: Colors.blueGrey,
+  //               onSurface: Colors.yellow,
+  //             ),
+  //             dialogBackgroundColor: Colors.blue[500],
+  //           ),
+  //           child: child,
+  //         );
+  //       });
+  //       if (fechaSeleccionada!= null) {
+  //     _selectedDate = fechaSeleccionada;
+  //     _textEditingController
+  //       ..text = DateFormat.yMMMd().format(_selectedDate)
+  //       ..selection = TextSelection.fromPosition(TextPosition(
+  //           offset: _textEditingController.text.length,
+  //           affinity: TextAffinity.upstream));
+  //   }
+  // }
+
+bool esAdult(String fecha){
+  print(fecha);
+  String datePattern = "yyyy-MM-dd";
+
+  DateTime birthDate = DateFormat(datePattern).parse(fecha);
+  DateTime today = DateTime.now();
+
+  int yearDiff = today.year - birthDate.year;
+  int monthDiff = today.month - birthDate.month;
+  int dayDiff = today.day - birthDate.day;
+
+  return yearDiff > 18 || yearDiff == 18 && monthDiff >= 0 && dayDiff >= 0;
+}
+  
 
 }

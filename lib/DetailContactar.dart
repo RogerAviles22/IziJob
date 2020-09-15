@@ -32,7 +32,7 @@ class DetailContactar extends StatelessWidget {
           ),
           SizedBox(height: 5),
           Text(
-            "Quedaría mejor una descripcion sobre la persona que aparece en este menu",
+            "${contacto.descripcion}",
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 25),

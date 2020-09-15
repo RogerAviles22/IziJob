@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:izijob/clases/contactar.dart';
 import 'package:izijob/publicarContacto.dart';
@@ -13,7 +14,7 @@ class ContactarVista extends StatefulWidget {
 }
 
 class _ContactarVistaState extends State<ContactarVista> {
-  var count = 0;
+  
   List<Contacto> contactarlist = [];
   List<Contacto> contactosFiltrados = [];
   bool busqueda = false;
@@ -29,7 +30,7 @@ class _ContactarVistaState extends State<ContactarVista> {
       contactarlist.clear();
 
       for (var individualKey in keys) {
-        count += 1;
+        
         Contacto cachuelo = Contacto(
           data[individualKey]['nombre'],
           data[individualKey]['edad'],
@@ -39,6 +40,7 @@ class _ContactarVistaState extends State<ContactarVista> {
           data[individualKey]['correo'],
           data[individualKey]['categoria'],
           data[individualKey]['idUser'],
+          data[individualKey]['descripcion']
         );
 
         //Agrega y ordena
@@ -112,7 +114,7 @@ class _ContactarVistaState extends State<ContactarVista> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("No hay información que ver " + count.toString(),
+                        Text("No hay información que ver " ,
                             style: TextStyle(
                               fontFamily: 'Varela',
                               fontSize: 18.0,
@@ -198,7 +200,7 @@ class _ContactarVistaState extends State<ContactarVista> {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      contacto.profesion,
+                      contacto.profesion.substring(0,1).toUpperCase() + contacto.profesion.substring(1),
                       style: Theme.of(context).textTheme.subtitle2,
                       textAlign: TextAlign.center,
                     )
@@ -207,6 +209,13 @@ class _ContactarVistaState extends State<ContactarVista> {
                 SizedBox(
                   height: 15.0,
                 ),
+                
+                Text(
+                  contacto.descripcion,
+                  style: Theme.of(context).textTheme.bodyText2,
+                  textAlign: TextAlign.center,),
+                
+                SizedBox(height: 10.0,),
                 Text(
                   contacto.servicio,
                   style: Theme.of(context).textTheme.bodyText2,
