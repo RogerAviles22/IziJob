@@ -16,14 +16,7 @@ class _PublicarCachueloState extends State<PublicarCachuelo> {
   //SingingCharacter _character = SingingCharacter.empleo;
   final globalKey = GlobalKey<ScaffoldState>();
 
-  String tfTitulo,
-      tfDescripcion,
-      //tfExp,
-      tfEstado,
-      //tfSueldo,
-      tfTelefono,
-      tfEmail,
-      tfCategoria;
+  String tfTitulo, tfDescripcion, tfEstado, tfTelefono, tfEmail, tfCategoria;
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,58 +81,6 @@ class _PublicarCachueloState extends State<PublicarCachuelo> {
                         },
                       ),
                     ),
-                    /*new ListTile(
-                      leading: const Icon(Icons.star),
-                      title: TextFormField(
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          labelText: 'Experiencia',
-                          hintText: 'Ej: Experiencia en dicho campo...',
-                        ),
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Por favor, ingresa la experiencia necesaria';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          return tfExp = value;
-                        },
-                      ),
-                    ),*/
-                    /*new ListTile(
-                        leading: const Icon(Icons.monetization_on),
-                        title: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Sueldo',
-                            hintText: 'Ingresa el posible sueldo',
-                          ),
-                          validator: (value) {
-                            return value.isEmpty
-                                ? 'Por favor, ingresa el sueldo.'
-                                : null;
-                          },
-                          onSaved: (value) {
-                            return tfSueldo = value;
-                          },
-                        )),*/
-                    /*new ListTile(
-                        leading: const Icon(Icons.supervisor_account),
-                        title: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Vacantes',
-                            hintText: 'Ej: 1, 2-4, Por ver...',
-                          ),
-                          validator: (value) {
-                            return value.isEmpty
-                                ? 'Por favor, ingrese números de vacantes.'
-                                : null;
-                          },
-                          onSaved: (value) {
-                            return tfVacantes = value;
-                          },
-                        )),*/
                     new ListTile(
                         leading: const Icon(Icons.contact_phone),
                         title: TextFormField(
@@ -206,18 +147,13 @@ class _PublicarCachueloState extends State<PublicarCachuelo> {
     var formatTime = new DateFormat.jm();
 
     String date = formatDate.format(dbTimeKey);
-    //print (date);
-
     String time = formatTime.format(dbTimeKey);
-    //print (time);
 
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     var data = {
       "titulo": tfTitulo,
       "descripcion": tfDescripcion,
-      //"experiencia": tfExp,
       "estado": "Activo",
-      //"sueldo": tfSueldo,
       "telefono": tfTelefono,
       "email": tfEmail,
       "categoria": tfCategoria,

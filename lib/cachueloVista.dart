@@ -47,7 +47,6 @@ class _CachueloVistaState extends State<CachueloVista> {
 
         var dbTimeKey = DateTime.now();
         var formatDate = DateFormat('d/M/y');
-        //var formatTime = new DateFormat.jm();
 
         String date = formatDate.format(dbTimeKey);
         List<String> fecha2 = date.split("/");
@@ -57,32 +56,18 @@ class _CachueloVistaState extends State<CachueloVista> {
 
         if (int.parse(ano2) > int.parse(ano)) {
           cachuelo.estado = "Inactivo";
-          cachueloRef
-              .child(individualKey)
-              .child("estado")
-              //.push()
-              .set("Inactivo");
+          cachueloRef.child(individualKey).child("estado").set("Inactivo");
         } else if (int.parse(ano2) == int.parse(ano)) {
           if (int.parse(mes2) > int.parse(mes)) {
             cachuelo.estado = "Inactivo";
-            cachueloRef
-                .child(individualKey)
-                .child("estado")
-                //.push()
-                .set("Inactivo");
+            cachueloRef.child(individualKey).child("estado").set("Inactivo");
           } else if (int.parse(mes2) == int.parse(mes)) {
             if (int.parse(dia2) - int.parse(dia) >= 3) {
               cachuelo.estado = "Inactivo";
-              cachueloRef
-                  .child(individualKey)
-                  .child("estado")
-                  //.push()
-                  .set("Inactivo");
+              cachueloRef.child(individualKey).child("estado").set("Inactivo");
             }
           }
         }
-
-        //String time = formatTime.format(dbTimeKey);
 
         //Agrega y ordena
         setState(() {
@@ -109,28 +94,6 @@ class _CachueloVistaState extends State<CachueloVista> {
   }
 
   @override
-  /*Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Cachuelo'),
-        backgroundColor : Colors.blue[900],
-        centerTitle: true,
-      ),
-      body: Center(
-
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor : Colors.blue[900],
-        onPressed: (){  
-               
-        },
-        child: const Icon(Icons.add),
-      ),  
-      //backgroundColor : Colors.green,
-      
-      //bottomNavigationBar: Footer()
-    );
-  }*/
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -140,7 +103,6 @@ class _CachueloVistaState extends State<CachueloVista> {
             ? Text('Cachuelo')
             : TextField(
                 onChanged: (value) {
-                  //print(value);
                   _filterCachuelos(value);
                 },
                 style: TextStyle(color: Colors.white),
@@ -173,7 +135,6 @@ class _CachueloVistaState extends State<CachueloVista> {
                 )
         ],
       ),
-
       body: Container(
           //padding: const EdgeInsets.all(5.0),
           child: filteredCachueloList.length == 0
@@ -196,27 +157,9 @@ class _CachueloVistaState extends State<CachueloVista> {
               : ListView.builder(
                   itemCount: filteredCachueloList.length,
                   itemBuilder: (_, index) {
-                    return postsCachuelo(filteredCachueloList[index]
-                        /*cachueloList[index].titulo,
-                        cachueloList[index].fechaPublicado,
-                        cachueloList[index].descripcion,
-                        cachueloList[index].categoria,*/
-                        );
+                    return postsCachuelo(filteredCachueloList[index]);
                   })),
-
       floatingActionButton: botonCachuelo(),
-
-      /*floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue[900],
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return PublicarCachuelo();
-          }));
-        },
-        child: const Icon(Icons.add),
-      ),*/
-      //backgroundColor: Colors.green,
-      //bottomNavigationBar: Footer()
     );
   }
 
@@ -227,7 +170,6 @@ class _CachueloVistaState extends State<CachueloVista> {
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return PublicarCachuelo();
-            //return Login();
           }));
         },
         child: const Icon(Icons.add),
@@ -267,7 +209,6 @@ class _CachueloVistaState extends State<CachueloVista> {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      //cachuelo.fechaPublicado.split("/")[0],
                       cachuelo.fechaPublicado,
                       style: Theme.of(context).textTheme.subtitle2,
                       textAlign: TextAlign.center,
@@ -277,14 +218,6 @@ class _CachueloVistaState extends State<CachueloVista> {
                 SizedBox(
                   height: 15.0,
                 ),
-                /*Text(
-                  cachuelo.tiempoPublicado.split(":")[0],
-                  style: Theme.of(context).textTheme.subtitle2,
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),*/
                 Text(
                   cachuelo.descripcion,
                   style: Theme.of(context).textTheme.bodyText2,
@@ -306,10 +239,6 @@ class _CachueloVistaState extends State<CachueloVista> {
                   child: Text(
                     "Estado: " + cachuelo.estado,
                     style: Theme.of(context).textTheme.caption,
-                    /*style: TextStyle(
-                        fontFamily: 'Varela',
-                        fontSize: 21.0,
-                      )*/
                   ),
                 )
               ],

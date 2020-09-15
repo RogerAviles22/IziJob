@@ -1,11 +1,7 @@
 import 'package:izijob/clases/trabajo.dart';
 
 class Cachuelo extends Trabajo {
-  String estado
-      //,
-      //vacantes,
-      // sueldo
-      ;
+  String estado;
 
   Cachuelo(
       String titulo,

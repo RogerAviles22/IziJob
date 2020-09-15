@@ -33,42 +33,6 @@ class DetailCachuelo extends StatelessWidget {
           SizedBox(height: 5),
           Text("${cachuelo.descripcion}"),
           SizedBox(height: 15),
-
-          /*Row(
-            children: [
-              const Icon(Icons.star),
-              SizedBox(width: 15),
-              Text(
-                "Experiencia: ",
-                style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
-            ],
-          ),
-          SizedBox(height: 5),
-          Text("${empleo.experiencia}"),
-          SizedBox(height: 15),
-          */
-          /*Row(
-            children: [
-              const Icon(Icons.monetization_on),
-              SizedBox(width: 15),
-              Text(
-                "Sueldo: ",
-                style: TextStyle(
-                  fontFamily: 'Varela',
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 5),
-          Text("${empleo.sueldo}"),
-          SizedBox(height: 15),*/
           Text(
             "Contactos: ",
             style: TextStyle(
