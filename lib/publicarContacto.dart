@@ -146,27 +146,12 @@ class _PublicarContactoState extends State<PublicarContacto>{
                             return tfcorreo = value;
                           },
                         )),
-                    new ListTile(
-                        leading: const Icon(Icons.category),
-                        title: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Categorías',
-                            hintText: 'Ej: salud, música, cocina...',
-                          ),
-                          validator: (value) {
-                            return value.isEmpty
-                                ? 'Por favor, ingresa al menos 1 categoría.'
-                                : null;
-                          },
-                          onSaved: (value) {
-                            return tfcategoria = value;
-                          },
-                        )),
+
                     new ListTile(
                         leading: const Icon(Icons.business_center),
                         title: TextFormField(
                           decoration: InputDecoration(
-                            labelText: 'Profesión: ',
+                            labelText: 'Profesión ',
                             hintText: 'Ej: cocineros, música, ingenieros...',
                           ),
                           validator: (value) {
@@ -197,9 +182,9 @@ class _PublicarContactoState extends State<PublicarContacto>{
                     new ListTile(
                       leading: const Icon(Icons.description),
                       title: TextFormField(
-                        maxLines: 8,
+                        maxLines: null,
                         decoration: InputDecoration(
-                          labelText: "Descipción",
+                          labelText: "Descripción",
                           hintText: 'Describe de la mejor manera tus aptitudes',
 
                         ),
@@ -212,7 +197,23 @@ class _PublicarContactoState extends State<PublicarContacto>{
                             return tfDescripcion = value;
                           },
                       )
-                    )                                                   
+                    ), 
+                         new ListTile(
+                        leading: const Icon(Icons.category),
+                        title: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Categorías',
+                            hintText: 'Ej: salud, música, cocina...',
+                          ),
+                          validator: (value) {
+                            return value.isEmpty
+                                ? 'Por favor, ingresa al menos 1 categoría.'
+                                : null;
+                          },
+                          onSaved: (value) {
+                            return tfcategoria = value;
+                          },
+                        )),                                                  
                   ],
                 ),
               ),

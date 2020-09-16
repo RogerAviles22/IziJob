@@ -97,7 +97,7 @@ class _RegistroState extends State<Registro> {
                           },
                         )),
                     new ListTile(
-                      leading: const Icon(Icons.email),
+                      leading: const Icon(Icons.lock),
                       title: TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(

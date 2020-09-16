@@ -207,20 +207,21 @@ class _ContactarVistaState extends State<ContactarVista> {
                   ],
                 ),
                 SizedBox(
-                  height: 15.0,
+                  height: 8.0,
                 ),
-                
+                                
+                Text(
+                  contacto.servicio,
+                  style: Theme.of(context).textTheme.caption,
+                  textAlign: TextAlign.left,
+                ),
+                SizedBox(height: 10.0,),
                 Text(
                   contacto.descripcion,
                   style: Theme.of(context).textTheme.bodyText2,
                   textAlign: TextAlign.center,),
                 
-                SizedBox(height: 10.0,),
-                Text(
-                  contacto.servicio,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  textAlign: TextAlign.center,
-                ),
+
                 SizedBox(
                   height: 10.0,
                 ),

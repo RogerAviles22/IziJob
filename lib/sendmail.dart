@@ -8,8 +8,8 @@ void enviarMail(String email) async{
     ..recipients.add(email)
     ..ccRecipients.addAll([email])
     ..bccRecipients.add(Address(email))
-    ..subject = '¡Bienvenido a IziJob! 😀 La fecha de tu registro es: ${DateTime.now()}'
-    ..text = 'Pilas .\nVergeles si responde.'
+    ..subject = '¡Bienvenido a IziJob! 😀 La fecha y hora de tu registro es: ${DateTime.now()}'
+    ..text = 'BIENVENIDO .\n'
     ..html = "<h1>Bienvenido a IziJob!</h1>\n<p>Pronto el trabajo de tu sueño te contactará!</p>";
 
     try {
